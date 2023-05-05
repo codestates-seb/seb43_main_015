@@ -1,13 +1,13 @@
 import { useRecoilState } from "recoil";
 
 
-const Footer = () => {
-
+const Login = () => {
     return(
         <> 
-            <h1>푸터입니다.</h1>
+        <h1>로그인 입니다.</h1>
         </>
     )
+    
 }
 
-export default Footer;
+export default Login;
