@@ -3,7 +3,6 @@ import theme from './theme';
 
 export const HeaderContainer = styled.div`
     width: 100%;
-    position: fixed;
     z-index: 10;
     height: 64px;
     border-top: 3px solid var(--orange-400);
