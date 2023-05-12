@@ -18,6 +18,7 @@ public class ReviewReplyService {
     @Transactional
     public ReviewReply createReply(ReviewReply reviewReply, Long reviewId) {
         reviewService.verifyReview(reviewId);
+        reviewReply.getReview().setReviewId(reviewId); // reviewId 저장
         return reviewReplyRepository.save(reviewReply);
     }
 

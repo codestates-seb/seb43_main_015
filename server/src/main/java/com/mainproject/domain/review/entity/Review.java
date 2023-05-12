@@ -1,11 +1,9 @@
 package com.mainproject.domain.review.entity;
 
 
+import com.mainproject.domain.member.entity.Member;
 import com.mainproject.global.audit.Auditable;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +11,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Review extends Auditable {
 
@@ -29,11 +29,8 @@ public class Review extends Auditable {
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<ReviewReply> reviewReplies;
 
-    @Builder
-    public Review(Long reviewId, String title, String content, List<ReviewReply> reviewReplies) {
-        this.reviewId = reviewId;
-        this.title = title;
-        this.content = content;
-        this.reviewReplies = reviewReplies;
-    }
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
 }

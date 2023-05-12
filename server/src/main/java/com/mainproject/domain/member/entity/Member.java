@@ -1,5 +1,7 @@
 package com.mainproject.domain.member.entity;
 
+import com.mainproject.domain.review.entity.Review;
+import com.mainproject.domain.review.entity.ReviewReply;
 import com.mainproject.global.audit.Auditable;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Getter
@@ -42,4 +45,10 @@ public class Member extends Auditable {
         this.password = password;
         this.username = username;
     }
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    List<Review> reviews;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    List<ReviewReply> reviewReplies;
 }
