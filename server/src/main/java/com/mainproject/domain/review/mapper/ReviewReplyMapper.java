@@ -18,8 +18,8 @@ public interface ReviewReplyMapper {
         }
 
         return ReviewReply.builder()
-
                 .content(requestBody.getContent())
+                .review(Review.builder().reviewId(requestBody.getReviewId()).build())
                 .build();
     }
 
@@ -43,7 +43,7 @@ public interface ReviewReplyMapper {
                 .reviewReplyId(reviewReply.getReviewReplyId())
                 .content(reviewReply.getContent())
 //                .reviewId(reviewReply.getReview().getReviewId())
-                .reviewReplyCreatedAt(reviewReply.getCreateAt())
+                .reviewReplyCreatedAt(reviewReply.getCreatedAt())
                 .reviewReplyModifiedAt(reviewReply.getModifiedAt())
                 .build();
     }
@@ -58,7 +58,7 @@ public interface ReviewReplyMapper {
                         .reviewReplyId(reviewReply.getReviewReplyId())
                         .content(reviewReply.getContent())
 //                .reviewId(reviewReply.getReview().getReviewId())
-                        .reviewReplyCreatedAt(reviewReply.getCreateAt())
+                        .reviewReplyCreatedAt(reviewReply.getCreatedAt())
                         .reviewReplyModifiedAt(reviewReply.getModifiedAt())
                         .build())
                 .collect(Collectors.toList());

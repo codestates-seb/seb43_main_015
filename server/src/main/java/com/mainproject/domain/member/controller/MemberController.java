@@ -1,10 +1,12 @@
 package com.mainproject.domain.member.controller;
 
 import com.mainproject.domain.member.dto.MemberDto;
+import com.mainproject.domain.member.dto.MemberPostDto;
 import com.mainproject.domain.member.entity.Member;
 import com.mainproject.domain.member.mapper.MemberMapper;
 import com.mainproject.domain.member.service.MemberService;
 import com.mainproject.global.response.SingleResponseDto;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +15,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/members")
+@RequestMapping("/api/members")
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
     private final MemberMapper mapper;
 
     @PostMapping
-    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
+    public ResponseEntity postMember(@Valid @RequestBody MemberPostDto requestBody) {
         Member member = mapper.memberPostDtoToMember(requestBody);
         Member createMember = memberService.createMember(member);
         return new ResponseEntity<>(

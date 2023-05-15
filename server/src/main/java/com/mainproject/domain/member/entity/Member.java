@@ -3,6 +3,7 @@ package com.mainproject.domain.member.entity;
 import com.mainproject.domain.review.entity.Review;
 import com.mainproject.domain.review.entity.ReviewReply;
 import com.mainproject.global.audit.Auditable;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

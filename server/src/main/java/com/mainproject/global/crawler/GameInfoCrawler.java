@@ -48,10 +48,9 @@ public class GameInfoCrawler {
                 if (descriptionElement != null && !descriptionElement.text().equals("관련 정보가 없습니다")) {
                     description = descriptionElement.text();
                 }
-
-                // 추출한 정보로 Game 객체 생성
+                
+                gameRepository.deleteAll(); // 갱신하기 위해 삭제?
                 Game game = new Game(title, rank, genre, publisher, description);
-
                 gameRepository.save(game);
             }
         } catch (Exception e) {

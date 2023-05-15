@@ -1,6 +1,9 @@
 package com.mainproject.domain.review.dto;
 
 import com.mainproject.domain.review.entity.ReviewReply;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,7 +48,8 @@ public class ReviewDto {
     }
 
     @Getter
-    @NoArgsConstructor
+    @Builder
+    @AllArgsConstructor
     public static class Response {
         private Long reviewId;
         private String title;
@@ -53,16 +57,7 @@ public class ReviewDto {
         private LocalDateTime reviewCreatedAt;
         private LocalDateTime reviewModifiedAt;
         private List<ReviewReply> reviewReplies;
-
-        @Builder
-        public Response(Long reviewId, String title, String content, LocalDateTime reviewCreatedAt, LocalDateTime reviewModifiedAt, List<ReviewReply> reviewReplies) {
-            this.reviewId = reviewId;
-            this.title = title;
-            this.content = content;
-            this.reviewCreatedAt = reviewCreatedAt;
-            this.reviewModifiedAt = reviewModifiedAt;
-            this.reviewReplies = reviewReplies;
-        }
+        private Long memberId;
     }
 
 }

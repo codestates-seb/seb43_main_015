@@ -1,5 +1,7 @@
 package com.mainproject.domain.member.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,21 +50,15 @@ public class MemberDto {
     }
 
     @Getter
-    @NoArgsConstructor
+    @Builder
+    @AllArgsConstructor
     public static class Response {
         private Long memberId;
         private String email;
         private String password;
         private String username;
         private LocalDateTime memberCreatedAt;
+        private LocalDateTime memberModifiedAt;
 
-        @Builder
-        public Response(Long memberId, String email, String password, String username, LocalDateTime memberCreatedAt) {
-            this.memberId = memberId;
-            this.email = email;
-            this.password = password;
-            this.username = username;
-            this.memberCreatedAt = memberCreatedAt;
-        }
     }
 }

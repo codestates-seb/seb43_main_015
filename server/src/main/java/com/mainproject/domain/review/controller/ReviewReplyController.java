@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/reviews")
+@RequestMapping("/api/reviews")
 @RequiredArgsConstructor
 public class ReviewReplyController {
     private final ReviewReplyService reviewReplyService;
@@ -26,6 +26,7 @@ public class ReviewReplyController {
 //        requestBody.setReviewId(reviewId);
 
         ReviewReply reviewReply = mapper.reviewReplyPostDtoToReviewReply(requestBody);
+//        requestBody.setReviewId(reviewId);
         ReviewReply createReply = reviewReplyService.createReply(reviewReply, reviewId);
 //        ReviewReply createReply = reviewReplyService.createReply(reviewReply);
         return new ResponseEntity<>(

@@ -3,6 +3,7 @@ package com.mainproject.domain.review.entity;
 
 import com.mainproject.domain.member.entity.Member;
 import com.mainproject.global.audit.Auditable;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;

@@ -32,7 +32,8 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.1.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.1.Final'
 
-	implementation 'org.jsoup:jsoup:1.15.3'
+	implementation 'org.jsoup:jsoup:1.15.3' // HTML parser
+	implementation 'io.springfox:springfox-boot-starter:3.0.0' // swagger
 }
 
 tasks.named('test') {
