@@ -1,8 +1,8 @@
 package com.mainproject.domain.review.controller;
 
 import com.mainproject.domain.member.service.MemberService;
-import com.mainproject.domain.review.dto.ReviewDto;
-import com.mainproject.domain.review.dto.ReviewReplyDto;
+import com.mainproject.domain.review.dto.ReviewPatchDto;
+import com.mainproject.domain.review.dto.ReviewPostDto;
 import com.mainproject.domain.review.entity.Review;
 import com.mainproject.domain.review.entity.ReviewReply;
 import com.mainproject.domain.review.mapper.ReviewMapper;
@@ -29,7 +29,7 @@ public class ReviewController {
     private final MemberService memberService;
 
     @PostMapping
-    public ResponseEntity postReview(@Valid @RequestBody ReviewDto.Post requestBody) {
+    public ResponseEntity postReview(@Valid @RequestBody ReviewPostDto requestBody) {
         Review review = mapper.reviewPostDtoToReview(requestBody);
         Review createReview = reviewService.createReview(review);
 
@@ -39,7 +39,7 @@ public class ReviewController {
     }
 
     @PatchMapping("/{review-id}/{member-id}")
-    public ResponseEntity patchReview(@Valid @RequestBody ReviewDto.Patch requestBody,
+    public ResponseEntity patchReview(@Valid @RequestBody ReviewPatchDto requestBody,
                                       @PathVariable("review-id") Long reviewId,
                                       @PathVariable("member-id") Long memberId) {
         requestBody.setReviewId(reviewId);

@@ -1,12 +1,11 @@
 package com.mainproject.domain.member.controller;
 
-import com.mainproject.domain.member.dto.MemberDto;
+import com.mainproject.domain.member.dto.MemberPatchDto;
 import com.mainproject.domain.member.dto.MemberPostDto;
 import com.mainproject.domain.member.entity.Member;
 import com.mainproject.domain.member.mapper.MemberMapper;
 import com.mainproject.domain.member.service.MemberService;
 import com.mainproject.global.response.SingleResponseDto;
-import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +30,7 @@ public class MemberController {
     }
 
     @PatchMapping("/{member-id}")
-    public ResponseEntity patchMember(@Valid @RequestBody MemberDto.Patch requestBody,
+    public ResponseEntity patchMember(@Valid @RequestBody MemberPatchDto requestBody,
                                       @PathVariable("member-id") Long memberId) {
         requestBody.setMemberId(memberId);
         Member member = mapper.memberPatchDtoToMember(requestBody);

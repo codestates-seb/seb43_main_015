@@ -1,7 +1,6 @@
 package com.mainproject.domain.review.mapper;
 
-import com.mainproject.domain.review.dto.ReviewDto;
-import com.mainproject.domain.review.dto.ReviewReplyDto;
+import com.mainproject.domain.review.dto.*;
 import com.mainproject.domain.review.entity.Review;
 import com.mainproject.domain.review.entity.ReviewReply;
 import org.mapstruct.Mapper;
@@ -12,18 +11,18 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface ReviewMapper {
-    Review reviewPostDtoToReview(ReviewDto.Post requestBody);
+    Review reviewPostDtoToReview(ReviewPostDto requestBody);
 
-    Review reviewPatchDtoToReview(ReviewDto.Patch requestBody);
+    Review reviewPatchDtoToReview(ReviewPatchDto requestBody);
 
-    ReviewDto.Response reviewToReviewResponseDto(Review review, List<ReviewReply> reviewReplies);
+    ReviewResponseDto reviewToReviewResponseDto(Review review, List<ReviewReply> reviewReplies);
 
     @Mapping(source = "createdAt", target = "reviewCreatedAt")
     @Mapping(source = "modifiedAt", target = "reviewModifiedAt")
     @Mapping(target = "memberId", source = "member.memberId")
-    ReviewDto.Response reviewToReviewResponseDto(Review review);
+    ReviewResponseDto reviewToReviewResponseDto(Review review);
 
-    List<ReviewDto.Response> reviewsToReviewResponseDto(List<Review> reviews);
+    List<ReviewResponseDto> reviewsToReviewResponseDto(List<Review> reviews);
 //    default Review reviewPostDtoToReview(ReviewDto.Post requestBody) {
 //        if (requestBody == null) {
 //            return null;
