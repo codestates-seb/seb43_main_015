@@ -109,10 +109,10 @@ const SignUp = () => {
     const signUpSubmit = async () => {
         try {
           const response = await axios
-            .post(`https://5517-124-111-225-247.ngrok-free.app/members/signup`, {
-              displayName,
+            .post(`https://7c7d-112-161-122-225.ngrok-free.app/api/members`, {
               email,
               password,
+              username: displayName,
             })
             .then(() => navigate('/login'));
         } catch (error) {

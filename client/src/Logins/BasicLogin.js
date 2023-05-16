@@ -76,23 +76,25 @@ const BasicLogin = () => {
     // 비어있으면 empty메세지 출력
     if (email === '') emptyEmailSet(true);
     // 유효하지않으면(이메일 형식) invalid 메세지 출력
-    else if (!emailRegex.test(email)) {
+    if (!emailRegex.test(email)) {
       emptyEmailSet(false);
       invalidEmailSet(true);
+      return null;
     }
 
     // 비어있으면 empty메세지 출력
     if (password === '') emptyPasswordSet(true);
     // 유효하지않으면(8자 이상) invalid 메세지 출력
-    else if (!passwordRegex.test(password)) {
+    if (!passwordRegex.test(password)) {
       emptyPasswordSet(false);
       invalidPasswordSet(true);
+      return null;
     }
 
     // login 전송 , 성공시 Common페이지 이동 및 loginstate true로 변경
-    if (email && password && emailRegex.test(email) && passwordRegex.test(password)) {
+    
       try {
-        const response = await axios.post('https://5517-124-111-225-247.ngrok-free.app/auth/login', {
+        const response = await axios.post('https://7c7d-112-161-122-225.ngrok-free.app/api/members/login', {
           username: email,
           password: password,
         });
@@ -114,7 +116,7 @@ const BasicLogin = () => {
         console.error(error.response.data.message);
         loginFailedSet(true);
       }
-    }
+    
 
   };
 
