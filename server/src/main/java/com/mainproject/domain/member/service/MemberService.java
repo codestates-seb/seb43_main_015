@@ -1,24 +1,40 @@
 package com.mainproject.domain.member.service;
 
+import com.mainproject.domain.auth.utils.CustomAuthorityUtils;
 import com.mainproject.domain.member.entity.Member;
 import com.mainproject.domain.member.repository.MemberRepository;
 import com.mainproject.global.exception.BusinessLogicException;
 import com.mainproject.global.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
 @Service
 @RequiredArgsConstructor
 public class MemberService {
+//    private final UserDetailsManager userDetailsManager;
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final CustomAuthorityUtils authorityUtils;
 
     //c
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
+
+        // password 암호화
+        String encryptedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encryptedPassword);
+        // role 저장
+        List<String> roles = authorityUtils.createRoles(member.getEmail());
+        member.setRoles(roles);
+
         return memberRepository.save(member);
     }
 
@@ -40,6 +56,7 @@ public class MemberService {
         Member findMember = findVerifiedMember(memberId);
         memberRepository.delete(findMember);
     }
+
     public void verifyExistsEmail(String email) {
         Optional<Member> findMember = memberRepository.findByEmail(email);
         findMember.ifPresent(member -> {

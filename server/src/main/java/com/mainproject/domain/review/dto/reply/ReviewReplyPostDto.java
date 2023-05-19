@@ -17,6 +17,8 @@ public class ReviewReplyPostDto {
 
     private Long reviewId;
 
+    private Long memberId;
+
     public void setReviewId(Long reviewId) {
         this.reviewId = reviewId;
     }

@@ -16,4 +16,6 @@ public class ReviewPostDto {
     private String title;
     @NotBlank
     private String content;
+
+    private Long memberId;
 }

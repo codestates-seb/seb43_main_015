@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface ReviewMapper {
+//    @Mapping(source = "memberId", target = "member.memberId")
     Review reviewPostDtoToReview(ReviewPostDto requestBody);
 
     Review reviewPatchDtoToReview(ReviewPatchDto requestBody);
@@ -19,7 +20,7 @@ public interface ReviewMapper {
 
     @Mapping(source = "createdAt", target = "reviewCreatedAt")
     @Mapping(source = "modifiedAt", target = "reviewModifiedAt")
-    @Mapping(target = "memberId", source = "member.memberId")
+//    @Mapping(source = "memberId", target = "member.memberId")
     ReviewResponseDto reviewToReviewResponseDto(Review review);
 
     List<ReviewResponseDto> reviewsToReviewResponseDto(List<Review> reviews);

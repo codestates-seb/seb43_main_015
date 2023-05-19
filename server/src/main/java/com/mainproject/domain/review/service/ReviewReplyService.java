@@ -19,6 +19,7 @@ public class ReviewReplyService {
     public ReviewReply createReply(ReviewReply reviewReply, Long reviewId) {
         reviewService.verifyReview(reviewId);
         reviewReply.getReview().setReviewId(reviewId); // reviewId 저장
+        reviewReply.getMember().setMemberId(reviewId); // TODO: memberId 넣기
         return reviewReplyRepository.save(reviewReply);
     }
 

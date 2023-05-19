@@ -26,7 +26,6 @@ public class ReviewReplyController {
 //        requestBody.setReviewId(reviewId);
 
         ReviewReply reviewReply = mapper.reviewReplyPostDtoToReviewReply(requestBody);
-//        requestBody.setReviewId(reviewId);
         ReviewReply createReply = reviewReplyService.createReply(reviewReply, reviewId);
 //        ReviewReply createReply = reviewReplyService.createReply(reviewReply);
         return new ResponseEntity<>(

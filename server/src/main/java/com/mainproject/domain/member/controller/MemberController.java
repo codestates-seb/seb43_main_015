@@ -29,6 +29,20 @@ public class MemberController {
         );
     }
 
+//    @PostMapping("/login")
+//    public ResponseEntity login(@RequestBody LoginDto loginDto) {
+//        String email = loginDto.getEmail();
+//        String password = loginDto.getPassword();
+//
+//        if (loginDto.getPassword().equals("password")) {
+//            return ResponseEntity.ok(TokenDto.builder()
+//                    .accessToken("secret")
+//                    .build());
+//        }
+//        return ResponseEntity.badRequest().build();
+//
+//    }
+
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@Valid @RequestBody MemberPatchDto requestBody,
                                       @PathVariable("member-id") Long memberId) {

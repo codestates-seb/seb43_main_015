@@ -16,7 +16,7 @@ public class ReviewReply extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "review_reply_id")
+    @Column
     private Long reviewReplyId;
 
     @Column(nullable = false)

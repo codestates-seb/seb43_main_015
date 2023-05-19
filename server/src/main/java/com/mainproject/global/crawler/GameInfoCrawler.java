@@ -24,6 +24,7 @@ public class GameInfoCrawler {
 
     @Scheduled(cron = "0 0 0 * * WED") // 매주 수요일 자정 실행
     public void updateGameRank() {
+        gameRepository.deleteAll(); // 갱신하기 위해 삭제
         try {
             String url = "https://www.gamemeca.com/ranking.php";
             Document doc = Jsoup.connect(url).get();
@@ -49,7 +50,6 @@ public class GameInfoCrawler {
                     description = descriptionElement.text();
                 }
                 
-                gameRepository.deleteAll(); // 갱신하기 위해 삭제?
                 Game game = new Game(title, rank, genre, publisher, description);
                 gameRepository.save(game);
             }

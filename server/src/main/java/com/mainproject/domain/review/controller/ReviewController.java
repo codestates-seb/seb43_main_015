@@ -1,5 +1,6 @@
 package com.mainproject.domain.review.controller;
 
+import com.mainproject.domain.member.entity.Member;
 import com.mainproject.domain.member.service.MemberService;
 import com.mainproject.domain.review.dto.ReviewPatchDto;
 import com.mainproject.domain.review.dto.ReviewPostDto;
@@ -63,7 +64,7 @@ public class ReviewController {
 
     @GetMapping
     public ResponseEntity findAllReview(@RequestParam int page, @RequestParam int size) {
-        Page<Review> allReviews = reviewService.findAllReviews(page -1, size);
+        Page<Review> allReviews = reviewService.findAllReviews(page - 1, size);
         List<Review> reviews = allReviews.getContent();
 
         return new ResponseEntity<>(

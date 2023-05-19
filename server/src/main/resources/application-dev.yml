@@ -1,0 +1,49 @@
+#spring:
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2
+#  datasource:
+#    url: jdbc:h2:mem:test
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mp?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: ${mysql_pw}
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL55Dialect
+    hibernate:
+      ddl-auto: none #update #create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        highlight_sql: true
+    database: mysql
+  sql:
+    init:
+      data-locations: classpath*:db/h2/data.sql
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher # swagger 오류 추가
+logging:
+  level:
+    com:
+      codestates: DEBUG
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
+server:
+  servlet:
+    encoding:
+      force-response: true
+mail:
+  address:
+    admin: admin@gmail.com
+
+jwt:
+  key: ${JWT_SECRET_KEY}
+  access-token-expiration-minutes: 60
+  refresh-token-expiration-minutes: 420
