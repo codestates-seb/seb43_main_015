@@ -1,6 +1,8 @@
 package com.mainproject.domain.review.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mainproject.domain.member.entity.Member;
 import com.mainproject.global.audit.Auditable;
 import io.swagger.annotations.ApiModelProperty;
@@ -27,9 +29,11 @@ public class Review extends Auditable {
     @Column(nullable = false)
     private String content;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<ReviewReply> reviewReplies;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;

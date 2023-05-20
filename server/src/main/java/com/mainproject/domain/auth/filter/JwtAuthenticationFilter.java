@@ -3,6 +3,7 @@ package com.mainproject.domain.auth.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mainproject.domain.auth.dto.LoginDto;
 import com.mainproject.domain.auth.jwt.JwtTokenizer;
+import com.mainproject.domain.auth.userdetails.MemberDetails;
 import com.mainproject.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -32,7 +33,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         ObjectMapper objectMapper = new ObjectMapper();
         LoginDto loginDto = objectMapper.readValue(request.getInputStream(), LoginDto.class);
 
-
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
 
@@ -44,7 +44,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws ServletException, IOException {
-        Member member = (Member) authResult.getPrincipal();
+        MemberDetails memberDetails = (MemberDetails) authResult.getPrincipal();
+        Member member = memberDetails.getMember();
 
         String accessToken = delegateAccessToken(member);
         String refreshToken = delegateRefreshToken(member);

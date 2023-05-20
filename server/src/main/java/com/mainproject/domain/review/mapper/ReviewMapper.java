@@ -16,7 +16,7 @@ public interface ReviewMapper {
 
     Review reviewPatchDtoToReview(ReviewPatchDto requestBody);
 
-    ReviewResponseDto reviewToReviewResponseDto(Review review, List<ReviewReply> reviewReplies);
+//    ReviewResponseDto reviewToReviewResponseDto(Review review, List<ReviewReply> reviewReplies);
 
     @Mapping(source = "createdAt", target = "reviewCreatedAt")
     @Mapping(source = "modifiedAt", target = "reviewModifiedAt")
@@ -47,21 +47,20 @@ public interface ReviewMapper {
 //                .build();
 //    }
 //
-//    default ReviewDto.Response reviewToReviewResponseDto(Review review, List<ReviewReply> reviewReplies) {
-//        if (review == null || reviewReplies == null) {
-//            return null;
-//        }
-//
-//        return ReviewDto.Response.builder()
-//                .reviewId(review.getReviewId())
-//                .title(review.getTitle())
-//                .content(review.getContent())
-//                .reviewCreatedAt(review.getCreatedAt())
-//                .reviewModifiedAt(review.getModifiedAt())
-////                .reviewReplies(reviewReplies)
-////                .reviewReplies(review.getReviewReplies()) // ?
-//                .build();
-//    }
+    default ReviewResponseDto reviewToReviewResponseDto(Review review, List<ReviewReply> reviewReplies) {
+        if (review == null || reviewReplies == null) {
+            return null;
+        }
+
+        return ReviewResponseDto.builder()
+                .reviewId(review.getReviewId())
+                .title(review.getTitle())
+                .content(review.getContent())
+                .reviewCreatedAt(review.getCreatedAt())
+                .reviewModifiedAt(review.getModifiedAt())
+                .reviewReplies(review.getReviewReplies())
+                .build();
+    }
 //
 //    default ReviewDto.Response reviewToReviewResponseDto(Review review) {
 //        if (review == null) {

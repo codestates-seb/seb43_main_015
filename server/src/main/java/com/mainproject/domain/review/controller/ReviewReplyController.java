@@ -23,11 +23,9 @@ public class ReviewReplyController {
     @PostMapping("/{review-id}/reply")
     public ResponseEntity postReviewReply(@PathVariable("review-id") Long reviewId,
                                           @RequestBody ReviewReplyPostDto requestBody) {
-//        requestBody.setReviewId(reviewId);
 
         ReviewReply reviewReply = mapper.reviewReplyPostDtoToReviewReply(requestBody);
         ReviewReply createReply = reviewReplyService.createReply(reviewReply, reviewId);
-//        ReviewReply createReply = reviewReplyService.createReply(reviewReply);
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.reviewReplyToReviewReplyResponseDto(createReply)), HttpStatus.CREATED
         );

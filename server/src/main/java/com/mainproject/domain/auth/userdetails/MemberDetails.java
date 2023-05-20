@@ -12,28 +12,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Getter
-public class MemberDetails implements UserDetails, OAuth2User {
+public class MemberDetails implements UserDetails {
     private final Member member;
-    private Map<String, Object> attributes;
-
     public MemberDetails(Member member) {
         this.member = member;
     }
 
-    public MemberDetails(Member member, Map<String, Object> attributes) {
-        this.member = member;
-        this.attributes = attributes;
-    }
-
-    @Override
-    public String getName() {
-        return member.getEmail();
-    }
-
-    @Override
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

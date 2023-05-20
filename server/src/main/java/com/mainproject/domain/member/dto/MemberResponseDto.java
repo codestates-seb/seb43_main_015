@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class MemberResponseDto {
     private Long memberId;
     private String email;
-    private String password;
+//    private String password;
     private String username;
     private LocalDateTime memberCreatedAt;
     private LocalDateTime memberModifiedAt;

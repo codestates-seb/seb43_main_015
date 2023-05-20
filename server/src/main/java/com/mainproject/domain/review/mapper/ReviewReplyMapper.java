@@ -9,6 +9,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface ReviewReplyMapper {
@@ -48,12 +49,12 @@ public interface ReviewReplyMapper {
 //                .build();
 //    }
 //
-//    default ReviewReplyDto.Response reviewReplyToReviewReplyResponseDto(ReviewReply reviewReply) {
+//    default ReviewReplyResponseDto reviewReplyToReviewReplyResponseDto(ReviewReply reviewReply) {
 //        if (reviewReply == null) {
 //            return null;
 //        }
 //
-//        return ReviewReplyDto.Response.builder()
+//        return ReviewReplyResponseDto.builder()
 //                .reviewReplyId(reviewReply.getReviewReplyId())
 //                .content(reviewReply.getContent())
 ////                .reviewId(reviewReply.getReview().getReviewId())
@@ -62,16 +63,17 @@ public interface ReviewReplyMapper {
 //                .build();
 //    }
 //
-//    default List<ReviewReplyDto.Response> reviewRepliesToReviewReplyResponseDto(List<ReviewReply> reviewReplies) {
+//    default List<ReviewReplyResponseDto> reviewRepliesToReviewReplyResponseDto(List<ReviewReply> reviewReplies) {
 //        if (reviewReplies == null) {
 //            return null;
 //        }
 //
 //        return reviewReplies.stream()
-//                .map(reviewReply -> ReviewReplyDto.Response.builder()
+//                .map(reviewReply -> ReviewReplyResponseDto.builder()
 //                        .reviewReplyId(reviewReply.getReviewReplyId())
 //                        .content(reviewReply.getContent())
-////                .reviewId(reviewReply.getReview().getReviewId())
+//
+//                .reviewId(reviewReply.getReview().getReviewId())
 //                        .reviewReplyCreatedAt(reviewReply.getCreatedAt())
 //                        .reviewReplyModifiedAt(reviewReply.getModifiedAt())
 //                        .build())
