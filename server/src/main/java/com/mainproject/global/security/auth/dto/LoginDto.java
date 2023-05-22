@@ -1,4 +1,4 @@
-package com.mainproject.domain.auth.dto;
+package com.mainproject.global.security.auth.dto;
 
 import lombok.Getter;
 import lombok.Setter;

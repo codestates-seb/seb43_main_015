@@ -1,7 +1,8 @@
-package com.mainproject.domain.auth.filter;
+package com.mainproject.global.security.auth.filter;
 
-import com.mainproject.domain.auth.jwt.JwtTokenizer;
-import com.mainproject.domain.auth.utils.CustomAuthorityUtils;
+import com.mainproject.global.security.auth.dto.TokenPrincipalDto;
+import com.mainproject.global.security.auth.jwt.JwtTokenizer;
+import com.mainproject.global.security.auth.utils.CustomAuthorityUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
@@ -19,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 public class JwtVerificationFilter extends OncePerRequestFilter {
@@ -59,9 +59,10 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     }
 
     private void setAuthenticationToContext(Map<String, Object> claims) {
-        String email = (String) claims.get("email");
+        String email = (String) claims.get("sub");
+        Long id = Long.valueOf((Integer) claims.get("memberId"));
         List<GrantedAuthority> authorities = authorityUtils.createAuthorities((List) claims.get("roles"));
-        Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, authorities);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(new TokenPrincipalDto(id, email), null, authorities);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }

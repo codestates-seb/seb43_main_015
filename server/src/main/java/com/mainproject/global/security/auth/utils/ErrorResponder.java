@@ -1,4 +1,4 @@
-package com.mainproject.domain.auth.utils;
+package com.mainproject.global.security.auth.utils;
 
 import com.google.gson.Gson;
 import com.mainproject.global.exception.ErrorResponse;

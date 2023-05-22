@@ -11,6 +11,7 @@ import com.mainproject.domain.review.mapper.ReviewReplyMapper;
 import com.mainproject.domain.review.service.ReviewService;
 import com.mainproject.global.response.MultiResponseDto;
 import com.mainproject.global.response.SingleResponseDto;
+import com.mainproject.global.security.auth.loginresolver.LoginMemberId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -30,8 +31,10 @@ public class ReviewController {
     private final MemberService memberService;
 
     @PostMapping
-    public ResponseEntity postReview(@Valid @RequestBody ReviewPostDto requestBody) {
-        Review review = mapper.reviewPostDtoToReview(requestBody);
+    public ResponseEntity postReview(@Valid @RequestBody ReviewPostDto requestBody,
+                                     @LoginMemberId Long memberId) {
+        Member member = memberService.findMember(memberId);
+        Review review = mapper.reviewPostDtoToReview(requestBody, member);
         Review createReview = reviewService.createReview(review);
 
         return new ResponseEntity<>(

@@ -1,5 +1,7 @@
 package com.mainproject.domain.review.service;
 
+import com.mainproject.domain.member.entity.Member;
+import com.mainproject.domain.member.service.MemberService;
 import com.mainproject.domain.review.entity.Review;
 import com.mainproject.domain.review.repository.ReviewRepository;
 import com.mainproject.global.exception.BusinessLogicException;
@@ -19,8 +21,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReviewService {
     private final ReviewRepository reviewRepository;
+    private final MemberService memberService;
 
-    public Review createReview(Review review) {
+    public Review createReview( Review review) {
+        Member member = memberService.findMember(review.getMember().getMemberId());
+        review.getMember().setMemberId(member.getMemberId());
+
         return reviewRepository.save(review);
     }
 
@@ -58,4 +64,11 @@ public class ReviewService {
 
     private void verifiedReviewMember(Long memberId, Review review) {
     }
+
+    private void verifyMember(Member member, Long memberId) {
+        if (!member.getMemberId().equals(memberId)) {
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_ALLOW);
+        }
+    }
+
 }

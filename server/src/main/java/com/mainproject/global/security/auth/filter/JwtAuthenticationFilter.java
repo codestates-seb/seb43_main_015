@@ -1,9 +1,8 @@
-package com.mainproject.domain.auth.filter;
+package com.mainproject.global.security.auth.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mainproject.domain.auth.dto.LoginDto;
-import com.mainproject.domain.auth.jwt.JwtTokenizer;
-import com.mainproject.domain.auth.userdetails.MemberDetails;
+import com.mainproject.global.security.auth.dto.LoginDto;
+import com.mainproject.global.security.auth.jwt.JwtTokenizer;
 import com.mainproject.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -44,13 +43,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws ServletException, IOException {
-        MemberDetails memberDetails = (MemberDetails) authResult.getPrincipal();
-        Member member = memberDetails.getMember();
+        Member member = (Member) authResult.getPrincipal();
 
         String accessToken = delegateAccessToken(member);
         String refreshToken = delegateRefreshToken(member);
 
-        response.setHeader("Authorization", "Bearer" + accessToken);
+        response.setHeader("Authorization", "Bearer " + accessToken);
         response.setHeader("Refresh", refreshToken);
 
         this.getSuccessHandler().onAuthenticationSuccess(request, response, authResult);
@@ -59,7 +57,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     // AccessToken 생성
     private String delegateAccessToken(Member member) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("email", member.getEmail());
+        claims.put("memberId", member.getMemberId());
         claims.put("roles", member.getRoles());
 
         String subject = member.getEmail(); // 제목 지정

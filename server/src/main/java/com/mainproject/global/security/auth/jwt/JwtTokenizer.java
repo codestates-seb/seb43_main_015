@@ -1,4 +1,4 @@
-package com.mainproject.domain.auth.jwt;
+package com.mainproject.global.security.auth.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
