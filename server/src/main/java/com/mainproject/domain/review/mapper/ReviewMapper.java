@@ -12,19 +12,20 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface ReviewMapper {
-//        @Mapping(source = "memberId", target = "member.memberId")
-//    Review reviewPostDtoToReview(ReviewPostDto requestBody, Member member);
-    default Review reviewPostDtoToReview(ReviewPostDto requestBody, Member member) {
-        if (requestBody == null || member == null) {
-            return null;
-        }
+//    @Mapping(source = "memberId", target = "member.memberId")
+    Review reviewPostDtoToReview(ReviewPostDto requestBody, Member member);
 
-        return Review.builder()
-                .title(requestBody.getTitle())
-                .content(requestBody.getContent())
-                .member(member)
-                .build();
-    }
+//    default Review reviewPostDtoToReview(ReviewPostDto requestBody, Member member) {
+//        if (requestBody == null || member == null) {
+//            return null;
+//        }
+//
+//        return Review.builder()
+//                .title(requestBody.getTitle())
+//                .content(requestBody.getContent())
+//                .member(member)
+//                .build();
+//    }
 
     Review reviewPatchDtoToReview(ReviewPatchDto requestBody);
 
@@ -36,7 +37,8 @@ public interface ReviewMapper {
     ReviewResponseDto reviewToReviewResponseDto(Review review);
 
     List<ReviewResponseDto> reviewsToReviewResponseDto(List<Review> reviews);
-//    default Review reviewPostDtoToReview(ReviewDto.Post requestBody) {
+
+    //    default Review reviewPostDtoToReview(ReviewDto.Post requestBody) {
 //        if (requestBody == null) {
 //            return null;
 //        }

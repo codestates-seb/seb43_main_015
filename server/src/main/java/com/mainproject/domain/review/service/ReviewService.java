@@ -24,8 +24,8 @@ public class ReviewService {
     private final MemberService memberService;
 
     public Review createReview( Review review) {
-        Member member = memberService.findMember(review.getMember().getMemberId());
-        review.getMember().setMemberId(member.getMemberId());
+//        Member member = memberService.findMember(review.getMember().getMemberId());
+//        review.getMember().setMemberId(member.getMemberId());
 
         return reviewRepository.save(review);
     }
