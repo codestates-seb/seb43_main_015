@@ -17,10 +17,10 @@ import javax.annotation.PostConstruct;
 public class GameInfoCrawler {
     private final GameRepository gameRepository;
 
-//    @PostConstruct // 최초 실행시 동작
-//    public void init() {
-//        updateGameRank();
-//    }
+    @PostConstruct // 최초 실행시 동작
+    public void init() {
+        updateGameRank();
+    }
 
     @Scheduled(cron = "0 0 0 * * WED") // 매주 수요일 자정 실행
     public void updateGameRank() {
