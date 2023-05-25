@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Component
@@ -30,12 +31,12 @@ public class GameInfoCrawler {
             Document doc = Jsoup.connect(url).get();
             Elements gameList = doc.select("tr.ranking-table-rows");
 
-
             for (Element gameElement : gameList) {
                 String title = gameElement.select("div.game-name a").text();
                 String rank = gameElement.select("span.rank").text();
                 String genre = gameElement.select("div.game-info span:nth-child(2)").text();
                 String publisher = gameElement.select("div.game-info span.company a").text();
+                String imageUrl = Objects.requireNonNull(gameElement.selectFirst("img.game-icon")).attr("src");
 
                 // 게임 상세 페이지 URL 추출
                 String gameDetailUrl = gameElement.select("div.game-name a").attr("href");
@@ -49,13 +50,13 @@ public class GameInfoCrawler {
                 if (descriptionElement != null && !descriptionElement.text().equals("관련 정보가 없습니다")) {
                     description = descriptionElement.text();
                 }
-                
-                Game game = new Game(title, rank, genre, publisher, description);
+
+                Game game = new Game(title, rank, genre, publisher, description, imageUrl);
                 gameRepository.save(game);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
 }

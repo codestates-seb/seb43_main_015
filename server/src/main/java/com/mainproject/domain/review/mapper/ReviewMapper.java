@@ -12,55 +12,29 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface ReviewMapper {
-//    @Mapping(source = "memberId", target = "member.memberId")
-    Review reviewPostDtoToReview(ReviewPostDto requestBody, Member member);
 
-//    default Review reviewPostDtoToReview(ReviewPostDto requestBody, Member member) {
-//        if (requestBody == null || member == null) {
-//            return null;
-//        }
-//
-//        return Review.builder()
-//                .title(requestBody.getTitle())
-//                .content(requestBody.getContent())
-//                .member(member)
-//                .build();
-//    }
+    default Review reviewPostDtoToReview(ReviewPostDto requestBody, Member member) {
+        if (requestBody == null || member == null) {
+            return null;
+        }
+
+        return Review.builder()
+                .title(requestBody.getTitle())
+                .content(requestBody.getContent())
+                .member(member)
+                .build();
+    }
 
     Review reviewPatchDtoToReview(ReviewPatchDto requestBody);
 
-//    ReviewResponseDto reviewToReviewResponseDto(Review review, List<ReviewReply> reviewReplies);
-
     @Mapping(source = "createdAt", target = "reviewCreatedAt")
     @Mapping(source = "modifiedAt", target = "reviewModifiedAt")
-//    @Mapping(source = "memberId", target = "member.memberId")
+    @Mapping(source = "member.memberId", target = "memberId")
     ReviewResponseDto reviewToReviewResponseDto(Review review);
 
     List<ReviewResponseDto> reviewsToReviewResponseDto(List<Review> reviews);
 
-    //    default Review reviewPostDtoToReview(ReviewDto.Post requestBody) {
-//        if (requestBody == null) {
-//            return null;
-//        }
-//
-//        return Review.builder()
-//                .title(requestBody.getTitle())
-//                .content(requestBody.getContent())
-//                .build();
-//    }
-//
-//    default Review reviewPatchDtoToReview(ReviewDto.Patch requestBody) {
-//        if (requestBody == null) {
-//            return null;
-//        }
-//
-//        return Review.builder()
-//                .reviewId(requestBody.getReviewId())
-//                .title(requestBody.getTitle())
-//                .content(requestBody.getContent())
-//                .build();
-//    }
-//
+
     default ReviewResponseDto reviewToReviewResponseDto(Review review, List<ReviewReply> reviewReplies) {
         if (review == null || reviewReplies == null) {
             return null;
@@ -73,37 +47,9 @@ public interface ReviewMapper {
                 .reviewCreatedAt(review.getCreatedAt())
                 .reviewModifiedAt(review.getModifiedAt())
                 .reviewReplies(review.getReviewReplies())
+                .reviewReplies(reviewReplies)
+                .memberId(review.getMember().getMemberId())
                 .build();
     }
-
-//    default ReviewDto.Response reviewToReviewResponseDto(Review review) {
-//        if (review == null) {
-//            return null;
-//        }
-//
-//        return ReviewDto.Response.builder()
-//                .reviewId(review.getReviewId())
-//                .title(review.getTitle())
-//                .content(review.getContent())
-//                .reviewCreatedAt(review.getCreatedAt())
-//                .reviewModifiedAt(review.getModifiedAt())
-//                .build();
-//    }
-//
-//    default List<ReviewDto.Response> reviewsToReviewResponseDto(List<Review> reviews) {
-//        if (reviews == null) {
-//            return null;
-//        }
-//
-//        return reviews.stream()
-//                .map(review -> ReviewDto.Response.builder()
-//                        .reviewId(review.getReviewId())
-//                        .title(review.getTitle())
-//                        .content(review.getContent())
-//                        .reviewCreatedAt(review.getCreatedAt())
-//                        .reviewModifiedAt(review.getModifiedAt())
-//                        .build())
-//                .collect(Collectors.toList());
-//    }
 }
 

@@ -31,11 +31,15 @@ public class Game {
     @Column
     private String description;
 
-    public Game(String title, String rank, String genre, String publisher, String description) {
+    @Column
+    private String imageUrl;
+
+    public Game(String title, String gameRank, String genre, String publisher, String description, String imageUrl) {
         this.title = title;
-        this.gameRank = rank;
+        this.gameRank = gameRank;
         this.genre = genre;
         this.publisher = publisher;
         this.description = description;
+        this.imageUrl = imageUrl;
     }
 }

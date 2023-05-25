@@ -14,7 +14,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL55Dialect
     hibernate:
-      ddl-auto: none #update #create
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true

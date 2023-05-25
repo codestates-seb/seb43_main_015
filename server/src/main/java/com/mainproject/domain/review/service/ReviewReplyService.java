@@ -18,8 +18,6 @@ public class ReviewReplyService {
     @Transactional
     public ReviewReply createReply(ReviewReply reviewReply, Long reviewId) {
         reviewService.verifyReview(reviewId);
-        reviewReply.getReview().setReviewId(reviewId); // reviewId 저장
-        reviewReply.getMember().setMemberId(reviewId); // TODO: memberId 넣기
         return reviewReplyRepository.save(reviewReply);
     }
 
@@ -30,7 +28,6 @@ public class ReviewReplyService {
 
     @Transactional
     public ReviewReply updateReply(ReviewReply reviewReply) {
-        // TODO: 회원검증
         return reviewReplyRepository.save(reviewReply);
     }
 

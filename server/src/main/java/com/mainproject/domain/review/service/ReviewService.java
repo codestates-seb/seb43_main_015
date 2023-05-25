@@ -21,12 +21,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReviewService {
     private final ReviewRepository reviewRepository;
-    private final MemberService memberService;
 
     public Review createReview( Review review) {
-//        Member member = memberService.findMember(review.getMember().getMemberId());
-//        review.getMember().setMemberId(member.getMemberId());
-
         return reviewRepository.save(review);
     }
 
@@ -41,7 +37,6 @@ public class ReviewService {
 
 
     public Review updateReview(Review review, Long memberId) {
-        verifiedReviewMember(memberId, review);
         return reviewRepository.save(review);
     }
 
@@ -60,9 +55,6 @@ public class ReviewService {
         if (findReviewId.isEmpty()) {
             throw new BusinessLogicException(ExceptionCode.REVIEW_NOT_FOUND);
         }
-    }
-
-    private void verifiedReviewMember(Long memberId, Review review) {
     }
 
     private void verifyMember(Member member, Long memberId) {
