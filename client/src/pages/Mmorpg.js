@@ -1,17 +1,9 @@
-import styled from 'styled-components';
+import React from 'react';
+
+import GameGenre from './GameGenre';
 
 const Mmorpg = () => {
-    const InitPage = styled.section`
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 100px;
-    `
-    return(
-        <InitPage>MMORPG</InitPage>
-    )
+  return <GameGenre genre="MMORPG" />;
 }
 
 export default Mmorpg;

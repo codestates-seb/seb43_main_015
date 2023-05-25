@@ -1,18 +1,9 @@
-import styled from "styled-components";
+import React from 'react';
+
+import GameGenre from './GameGenre';
 
 const Action = () => {
-    const ActionPage = styled.section`
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 100px;
-    `
-
-    return(
-        <ActionPage>액션</ActionPage>
-    )
+  return <GameGenre genre="ACTION" />;
 }
 
 export default Action;
