@@ -1,12 +1,16 @@
 package com.mainproject.domain.review.controller;
 
+import com.mainproject.domain.member.entity.Member;
+import com.mainproject.domain.member.service.MemberService;
 import com.mainproject.domain.review.dto.reply.ReviewReplyPatchDto;
 import com.mainproject.domain.review.dto.reply.ReviewReplyPostDto;
+import com.mainproject.domain.review.entity.Review;
 import com.mainproject.domain.review.entity.ReviewReply;
 import com.mainproject.domain.review.mapper.ReviewReplyMapper;
 import com.mainproject.domain.review.service.ReviewReplyService;
 import com.mainproject.domain.review.service.ReviewService;
 import com.mainproject.global.response.SingleResponseDto;
+import com.mainproject.global.security.auth.loginresolver.LoginMemberId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,22 +21,24 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ReviewReplyController {
     private final ReviewReplyService reviewReplyService;
+    private final MemberService memberService;
     private final ReviewService reviewService;
     private final ReviewReplyMapper mapper;
 
     @PostMapping("/{review-id}/reply")
     public ResponseEntity postReviewReply(@PathVariable("review-id") Long reviewId,
-                                          @RequestBody ReviewReplyPostDto requestBody) {
-
-        ReviewReply reviewReply = mapper.reviewReplyPostDtoToReviewReply(requestBody);
+                                          @RequestBody ReviewReplyPostDto requestBody,
+                                          @LoginMemberId Long memberId) {
+        Member member = memberService.findMember(memberId);
+        Review review = reviewService.findReview(reviewId);
+        ReviewReply reviewReply = mapper.reviewReplyPostDtoToReviewReply(requestBody, member, review);
         ReviewReply createReply = reviewReplyService.createReply(reviewReply, reviewId);
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.reviewReplyToReviewReplyResponseDto(createReply)), HttpStatus.CREATED
         );
     }
 
-
-    @PatchMapping("/{review-id}/reply/{reviewReply-id}")
+//    @PatchMapping("/{review-id}/reply/{reviewReply-id}")
     public ResponseEntity updateReviewReply(@PathVariable("review-id") Long reviewId,
                                             @PathVariable("reviewReply-id") Long reviewReplyId,
                                             @RequestBody ReviewReplyPatchDto requestBody) {

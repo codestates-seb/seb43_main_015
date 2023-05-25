@@ -3,15 +3,13 @@ package com.mainproject.domain.member.entity;
 import com.mainproject.domain.review.entity.Review;
 import com.mainproject.domain.review.entity.ReviewReply;
 import com.mainproject.global.audit.Auditable;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+
 import java.util.ArrayList;
 import java.util.List;
 

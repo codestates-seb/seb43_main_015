@@ -7,7 +7,6 @@ import com.mainproject.domain.review.dto.ReviewPostDto;
 import com.mainproject.domain.review.entity.Review;
 import com.mainproject.domain.review.entity.ReviewReply;
 import com.mainproject.domain.review.mapper.ReviewMapper;
-import com.mainproject.domain.review.mapper.ReviewReplyMapper;
 import com.mainproject.domain.review.service.ReviewService;
 import com.mainproject.global.response.MultiResponseDto;
 import com.mainproject.global.response.SingleResponseDto;
@@ -27,7 +26,6 @@ import java.util.List;
 public class ReviewController {
     private final ReviewService reviewService;
     private final ReviewMapper mapper;
-    private final ReviewReplyMapper replyMapper;
     private final MemberService memberService;
 
     @PostMapping
@@ -42,7 +40,7 @@ public class ReviewController {
         );
     }
 
-    @PatchMapping("/{review-id}/{member-id}")
+    //    @PatchMapping("/{review-id}/{member-id}")
     public ResponseEntity patchReview(@Valid @RequestBody ReviewPatchDto requestBody,
                                       @PathVariable("review-id") Long reviewId,
                                       @PathVariable("member-id") Long memberId) {
