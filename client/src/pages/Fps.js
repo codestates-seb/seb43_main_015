@@ -1,19 +1,9 @@
-import styled from "styled-components";
+import React from 'react';
 
+import GameGenre from './GameGenre';
 
 const Fps = () => {
-
-    const InitPage = styled.section`
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 100px;
-    `
-    return(
-        <InitPage>FPS</InitPage>
-    )
+    return <GameGenre genre="FPS" />;
 }
 
 export default Fps;
